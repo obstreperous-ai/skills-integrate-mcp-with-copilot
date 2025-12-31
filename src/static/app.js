@@ -128,9 +128,12 @@ document.addEventListener("DOMContentLoaded", () => {
           if (index > -1) {
             allActivities[activity].participants.splice(index, 1);
           }
+          renderActivities();
+          populateActivitySelect();
+        } else {
+          // Fallback: refetch if activity not found locally
+          fetchActivities();
         }
-        renderActivities();
-        populateActivitySelect();
       } else {
         messageDiv.textContent = result.detail || "An error occurred";
         messageDiv.className = "error";
@@ -177,9 +180,12 @@ document.addEventListener("DOMContentLoaded", () => {
         // Update local data and re-render to preserve filter/sort state
         if (allActivities[activity] && allActivities[activity].participants) {
           allActivities[activity].participants.push(email);
+          renderActivities();
+          populateActivitySelect();
+        } else {
+          // Fallback: refetch if activity not found locally
+          fetchActivities();
         }
-        renderActivities();
-        populateActivitySelect();
       } else {
         messageDiv.textContent = result.detail || "An error occurred";
         messageDiv.className = "error";
