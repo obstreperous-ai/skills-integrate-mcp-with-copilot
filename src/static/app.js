@@ -182,8 +182,18 @@ document.addEventListener("DOMContentLoaded", () => {
         messageDiv.textContent = result.message;
         messageDiv.className = "success";
 
-        // Refresh activities list to show updated participants
-        fetchActivities();
+        // Update local data and re-render to preserve filter/sort state
+        if (allActivities[activity] && allActivities[activity].participants) {
+          const index = allActivities[activity].participants.indexOf(email);
+          if (index > -1) {
+            allActivities[activity].participants.splice(index, 1);
+          }
+          renderActivities();
+          populateActivitySelect();
+        } else {
+          // Fallback: refetch if activity not found locally
+          fetchActivities();
+        }
       } else {
         messageDiv.textContent = result.detail || "An error occurred";
         messageDiv.className = "error";
@@ -227,8 +237,15 @@ document.addEventListener("DOMContentLoaded", () => {
         messageDiv.className = "success";
         signupForm.reset();
 
-        // Refresh activities list to show updated participants
-        fetchActivities();
+        // Update local data and re-render to preserve filter/sort state
+        if (allActivities[activity] && allActivities[activity].participants) {
+          allActivities[activity].participants.push(email);
+          renderActivities();
+          populateActivitySelect();
+        } else {
+          // Fallback: refetch if activity not found locally
+          fetchActivities();
+        }
       } else {
         messageDiv.textContent = result.detail || "An error occurred";
         messageDiv.className = "error";
