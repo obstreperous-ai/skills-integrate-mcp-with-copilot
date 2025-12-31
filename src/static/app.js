@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Helper function to parse schedule and extract earliest day/time for sorting
   function parseScheduleForSorting(schedule) {
-    if (!schedule) return { day: 7, hour: 24, minute: 0 }; // Default to end of week
+    if (!schedule) return { day: 7, hour: 23, minute: 59 }; // Default to end of week
     
     const dayOrder = {
       'monday': 1, 'mon': 1,
@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
       'thursday': 4, 'thu': 4, 'thur': 4, 'thurs': 4,
       'friday': 5, 'fri': 5,
       'saturday': 6, 'sat': 6,
-      'sunday': 0, 'sun': 0
+      'sunday': 7, 'sun': 7
     };
     
     // Extract the first day mentioned in the schedule
