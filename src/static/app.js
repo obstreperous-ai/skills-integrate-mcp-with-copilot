@@ -8,9 +8,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let allActivities = {};
 
-  // Utility function to escape HTML entities to prevent XSS
+  // Helper function to escape HTML to prevent XSS attacks
   function escapeHtml(text) {
-    if (!text) return '';
+    if (text === null || text === undefined) return '';
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
@@ -207,3 +207,4 @@ document.addEventListener("DOMContentLoaded", () => {
   // Initialize app
   fetchActivities();
 });
+
