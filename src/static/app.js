@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Helper function to escape HTML to prevent XSS attacks
   function escapeHtml(text) {
-    if (text == null) return '';
+    if (text === null || text === undefined) return '';
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
